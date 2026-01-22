@@ -52,12 +52,13 @@ function SignIn() {
       const data = await res.json();
 
       if (!res.ok) {
+        // ✅ ALWAYS DISPATCH STRING ERROR
         dispatch(signInFailure(data?.message || "Login failed"));
         dispatch(loadingEnd());
         return;
       }
 
-      /* ===== STORE TOKENS (IF USED) ===== */
+      /* ===== STORE TOKENS ===== */
       if (data?.accessToken) {
         localStorage.setItem("accessToken", data.accessToken);
       }
@@ -146,8 +147,9 @@ function SignIn() {
             </p>
           </div>
 
+          {/* ✅ SAFE ERROR RENDERING */}
           <p className="text-[10px] text-red-600">
-            {isError ? isError : " "}
+            {isError && (isError.message || isError)}
           </p>
         </div>
       </form>
