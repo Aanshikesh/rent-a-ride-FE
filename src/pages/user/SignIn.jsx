@@ -35,7 +35,7 @@ function SignIn() {
 
   // ✅ FIXED: remove `e`, react-hook-form already prevents default
   const onSubmit = async (formData) => {
-    const BASE_URL = import.meta.env.VITE_PRODUCTION_BACKEND_URL;
+    const BASE_URL = (import.meta.env.VITE_PRODUCTION_BACKEND_URL || "").replace(/\/$/, "");
 
     try {
       dispatch(signInStart());

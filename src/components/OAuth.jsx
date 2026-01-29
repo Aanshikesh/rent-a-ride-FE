@@ -18,7 +18,7 @@ function OAuth() {
   const navigate = useNavigate();
 
   const handleGoogleClick = async () => {
-    const BASE_URL = import.meta.env.VITE_PRODUCTION_BACKEND_URL;
+    const BASE_URL = (import.meta.env.VITE_PRODUCTION_BACKEND_URL || "").replace(/\/$/, "");
 
     try {
       dispatch(signInStart());
