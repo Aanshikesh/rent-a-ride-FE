@@ -33,8 +33,10 @@ const VehicleDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/user/listAllVehicles", {
-          headers: { "Authorization": `Bearer ${refreshToken},${accessToken}` },
+        const BASE_URL = (import.meta.env.VITE_PRODUCTION_BACKEND_URL || "").replace(/\/$/, "");
+        const res = await fetch(`${BASE_URL}/api/user/listAllVehicles`, {
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
         });
         if (!res.ok) {
           console.log("not success");

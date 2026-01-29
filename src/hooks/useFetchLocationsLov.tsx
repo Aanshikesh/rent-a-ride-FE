@@ -10,7 +10,8 @@ const useFetchLocationsLov = () => {
   const fetchLov = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch("/api/admin/getVehicleModels", {
+      const BASE_URL = (import.meta.env.VITE_PRODUCTION_BACKEND_URL || "").replace(/\/$/, "");
+      const res = await fetch(`${BASE_URL}/api/admin/getVehicleModels`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
