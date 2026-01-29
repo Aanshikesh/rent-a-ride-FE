@@ -34,12 +34,12 @@ const UserProfileSidebar = () => {
 
   //SignOut
   const handleSignout = async () => {
-    const res = await fetch("/api/admin/signout", {
+    const BASE_URL = (import.meta.env.VITE_PRODUCTION_BACKEND_URL || "").replace(/\/$/, "");
+    const res = await fetch(`${BASE_URL}/api/admin/signout`, {
       method: "GET",
-      credentials:'include'
+      credentials: "include",
     });
-    const data = await res.json();
-    if (data) {
+    if (res.ok) {
       dispatch(signOut());
       navigate("/signin");
     }
@@ -48,12 +48,14 @@ const UserProfileSidebar = () => {
   const handleDelete = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const BASE_URL = (import.meta.env.VITE_PRODUCTION_BACKEND_URL || "").replace(/\/$/, "");
+      const res = await fetch(`${BASE_URL}/api/user/delete/${currentUser._id}`, {
         method: "DELETE",
+        credentials: "include",
       });
       const data = await res.json();
-      if (data.succes === false) {
-        dispatch(deleteUserFailure(data));
+      if (!res.ok) {
+        dispatch(deleteUserFailure(data?.message || "Delete failed"));
         return;
       }
       dispatch(deleteUserSuccess(data));
