@@ -112,8 +112,10 @@ const CarSearch = () => {
           pickUpLocation: data.pickup_location,
         };
 
-        const res = await fetch("api/user/showSingleofSameModel", {
+        const BASE_URL = import.meta.env.VITE_PRODUCTION_BACKEND_URL || "";
+        const res = await fetch(`${BASE_URL}/api/user/showSingleofSameModel`, {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },

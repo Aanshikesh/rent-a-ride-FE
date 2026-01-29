@@ -39,9 +39,11 @@ const Filter = () => {
     if (transformedData && transformedData.length <= 0 && !variantMode) {
       dispatch(setFilteredData(userAllVehicles));
     } else if (transformedData && transformedData.length > 0) {
-      try {
-        const res = await fetch("api/user/filterVehicles", {
+        try {
+        const BASE_URL = import.meta.env.VITE_PRODUCTION_BACKEND_URL || "";
+        const res = await fetch(`${BASE_URL}/api/user/filterVehicles`, {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },

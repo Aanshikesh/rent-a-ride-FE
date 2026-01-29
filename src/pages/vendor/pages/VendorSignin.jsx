@@ -33,26 +33,30 @@ function VendorSignin() {
   const dispatch = useDispatch();
 
   const onSubmit = async (formData, e) => {
-    e.preventDefault();
     try {
       dispatch(signInStart());
-      const res = await fetch("api/vendor/vendorsignin", {
+      const BASE_URL = import.meta.env.VITE_PRODUCTION_BACKEND_URL || "";
+      const res = await fetch(`${BASE_URL}/api/vendor/vendorsignin`, {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       const data = await res.json();
 
-      if (data.succes === false) {
-        dispatch(signInFailure(data));
+      if (!res.ok) {
+        dispatch(signInFailure(data?.message || "Login failed"));
         return;
       }
+
       if (data.isVendor) {
-        navigate("/vendorDashboard");
         dispatch(signInSuccess(data));
+        navigate("/vendorDashboard");
+      } else {
+        dispatch(signInFailure("Not a vendor account"));
       }
     } catch (error) {
-      dispatch(signInFailure(error));
+      dispatch(signInFailure("Network error"));
     }
   };
 
