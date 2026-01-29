@@ -30,6 +30,7 @@ function SignUp() {
   });
 
   const [isError, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -37,6 +38,7 @@ function SignUp() {
   const onSubmit = async (formData) => {
     setLoading(true);
     setError(false);
+    setErrorMessage("");
 
     try {
       const res = await fetch(
@@ -55,6 +57,7 @@ function SignUp() {
 
       if (!res.ok) {
         setError(true);
+        setErrorMessage(data.message || "Registration failed");
         return;
       }
 
@@ -62,6 +65,7 @@ function SignUp() {
     } catch (error) {
       setLoading(false);
       setError(true);
+      setErrorMessage("Network error. Please try again.");
     }
   };
 
@@ -133,16 +137,18 @@ function SignUp() {
           {isLoading ? "Registering..." : "Register"}
         </button>
 
-        <div className="flex justify-between">
+        <div className="flex flex-col gap-2">
           <p className="text-[10px]">
             Have an account?{" "}
             <Link to="/signin" className="text-blue-600">
               Sign in
             </Link>
           </p>
-          <p className="text-[10px] text-red-600">
-            {isError && "Something went wrong"}
-          </p>
+          {isError && (
+            <p className="text-[10px] text-red-600 font-semibold">
+              ❌ {errorMessage}
+            </p>
+          )}
         </div>
       </form>
 
