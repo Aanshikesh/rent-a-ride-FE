@@ -33,7 +33,7 @@ import {
               <div>
                 <FooterTitle title="Follow us" className="text-justify" />
                 <FooterLinkGroup col>
-                  <FooterLink href="https://github.com/jeevan-aj">Github</FooterLink>
+                  <FooterLink href="https://github.com/Aanshikesh">Github</FooterLink>
                   <FooterLink href="#">Discord</FooterLink>
                 </FooterLinkGroup>
               </div>
@@ -50,8 +50,8 @@ import {
           <div className="w-full sm:flex sm:items-center sm:justify-between lg:px-10 ">
             <FooterCopyright href="#" by="Rent a Ride" year={2024} />
             <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-              <FooterIcon href="https://www.linkedin.com/in/jeevan-joji-25b799275/" icon={BsLinkedin} />
-              <FooterIcon href="https://github.com/jeevan-aj" icon={BsGithub} />
+              <FooterIcon href="https://www.linkedin.com/in/aanshikesh-rawat/" icon={BsLinkedin} />
+              <FooterIcon href="https://github.com/Aanshikesh" icon={BsGithub} />
               <FooterIcon href="#" icon={BsInstagram} />
               <FooterIcon href="#" icon={BsTwitter} />
              
